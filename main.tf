@@ -19,7 +19,7 @@ provider "aws" {
   region = var.region
   default_tags {
     tags = {
-      Project = "<project name>"
+      Project = "terraform-aws-collaboration"
     }
   }
 }
