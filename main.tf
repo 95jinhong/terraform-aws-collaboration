@@ -20,11 +20,7 @@ provider "aws" {
   default_tags {
     tags = {
       Project = "terraform-aws-collaboration"
-<<<<<<< HEAD
       Owner = "tom-origin"
-=======
-      Owner   = "tom"
->>>>>>> main
     }
   }
 }
