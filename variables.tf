@@ -1,4 +1,5 @@
 variable "prefix" {
+  default= "dev"
   description = "This prefix will be included in the name of most resources."
 }
 
@@ -35,4 +36,30 @@ variable "width" {
 variable "placeholder" {
   default     = "placekitten.com"
   description = "Image-as-a-service URL. Some other fun ones to try are fillmurray.com, placecage.com, placebeard.it, loremflickr.com, baconmockup.com, placeimg.com, placebear.com, placeskull.com, stevensegallery.com, placedog.net"
+}
+
+variable "aws_config" {
+  default = ["/Users/hong.park/.aws/config"]
+  description = "95jinhong aws config file"
+}
+
+variable "aws_credentials" {
+  default = ["/Users/hong.park/.aws/credentials"]
+  description = "95jinhong aws credentials"
+}
+
+variable "aws_profile" {
+  default = "terraform"
+  description = "95jinhong account"
+}
+
+variable "environment" {
+  type  = "string"
+  description = "Define infrastructure's environment"
+  default = "dev"
+
+  validation{
+    condition = contains(["dev", "qa", "prod"], var.environment)
+    error_message = "The enviroment value must be dev, qa, or prod."
+  }
 }
