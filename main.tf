@@ -1,12 +1,12 @@
 terraform {
-  // cloud {
-  //   organization = "<MY_ORG_NAME>"         # 생성한 ORG 이름 지정
-  //   hostname     = "app.terraform.io"      # default
+   cloud {
+     organization = "hongpark"         # 생성한 ORG 이름 지정
+     hostname     = "app.terraform.io"      # default
 
-  //   workspaces {
-  //     name = "collaboration"  # 없으면 생성됨
-  //   }
-  // }
+     workspaces {
+       name = "collaboration"  # 없으면 생성됨
+     }
+   }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -17,6 +17,9 @@ terraform {
 
 provider "aws" {
   region = var.region
+  shared_config_files = var.aws_config
+  shared_credentials_files = var.aws_credentials
+  profile = "terraform"
   default_tags {
     tags = {
       Project = "terraform-aws-collaboration"
@@ -25,13 +28,14 @@ provider "aws" {
   }
 }
 
+
 resource "aws_vpc" "hashicat" {
   cidr_block           = var.address_space
   enable_dns_hostnames = true
 
   tags = {
     name        = "${var.prefix}-vpc-${var.region}"
-    environment = "Production"
+    environment = "var.environment"
   }
 }
 
